@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151916">
+  <meta name="description" content="Bring a question to the AI Council and explore it from three different perspectives.">
+  <title>AI Council | A room for better questions</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="#main" aria-label="AI Council home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-copy"><strong>AI COUNCIL</strong><small>THINK IN COMPANY</small></span>
+      </a>
+
+      <div class="sidebar-section">
+        <p class="section-label">Workspace</p>
+        <div class="workspace-item" aria-current="page"><span class="workspace-glyph" aria-hidden="true">&#9673;</span><span>Council room</span><span class="live-mark" aria-label="Local demo"></span></div>
+      </div>
+
+      <div class="sidebar-section session-section">
+        <div class="section-heading"><p class="section-label">Session</p><span class="session-indicator">LOCAL</span></div>
+        <div class="session-card"><span class="session-index">01</span><div><strong>Open discussion</strong><small id="sidebar-session-topic">Waiting for a question</small></div></div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="local-note"><span class="note-mark" aria-hidden="true">i</span><p><strong>Local prototype</strong><br>Replies are sample responses. No AI provider is connected.</p></div>
+        <div class="profile"><span class="profile-avatar" aria-hidden="true">B</span><span class="profile-name">Bogdan</span><span class="profile-status">YOU</span></div>
+      </div>
+    </aside>
+
+    <main class="main-panel" id="main">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-slash">/</span><strong>Council room</strong></div>
+        <div class="topbar-status"><span class="status-dot" aria-hidden="true"></span><span>Local demo</span><span class="status-divider" aria-hidden="true"></span><span>3 agents</span></div>
+      </header>
+
+      <section class="room-heading" aria-labelledby="room-title">
+        <div class="room-kicker"><span class="room-kicker-line"></span>THE TABLE IS OPEN</div>
+        <h1 id="room-title">A question can hold<br><em>more than one truth.</em></h1>
+        <p class="room-description">Three distinct perspectives. One shared room to think it through.</p>
+      </section>
+
+      <section class="conversation" id="conversation" aria-label="Council conversation" aria-live="polite">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-stamp" aria-hidden="true"><span>Q</span><i></i></div>
+          <p class="empty-title">The first word is yours.</p>
+          <p class="empty-copy">The council is listening.</p>
+        </div>
+        <div class="message-list" id="message-list"></div>
+      </section>
+
+      <section class="composer-section" aria-label="Ask the council">
+        <div class="composer-topline"><span class="composer-label">YOUR QUESTION</span><span class="character-count" id="character-count">0 / 2000</span></div>
+        <form class="composer" id="question-form">
+          <label class="visually-hidden" for="question-input">Your question for the council</label>
+          <textarea id="question-input" name="question" rows="2" maxlength="2000" placeholder="What would you like to think through?" required></textarea>
+          <div class="composer-footer">
+            <span class="keyboard-hint">Enter to send <span aria-hidden="true">·</span> Shift + Enter for a new line</span>
+            <div class="composer-actions">
+              <button class="button button-quiet" id="ask-once" type="submit" disabled>Ask the council <span aria-hidden="true">&#8599;</span></button>
+              <button class="button button-discuss" id="start-discussion" type="button" disabled><span class="discussion-glyph" aria-hidden="true">&#10022;</span> Council Discussion</button>
+            </div>
+          </div>
+        </form>
+        <p class="privacy-note">Your messages are saved in this browser only.</p>
+      </section>
+    </main>
+
+    <aside class="council-panel" aria-label="Council members and discussion details">
+      <div class="panel-header"><span class="panel-overline">AT THE TABLE</span><span class="member-count">03</span></div>
+
+      <div class="agent-list" id="agent-list">
+        <article class="agent-card agent-sage" data-agent="sage">
+          <div class="agent-avatar" aria-hidden="true"><span>S</span><i></i></div>
+          <div class="agent-info"><h2>Sage</h2><p>Philosopher</p></div>
+          <span class="agent-state" aria-label="Ready"></span>
+        </article>
+        <article class="agent-card agent-echo" data-agent="echo">
+          <div class="agent-avatar" aria-hidden="true"><span>E</span><i></i></div>
+          <div class="agent-info"><h2>Echo</h2><p>Evidence &amp; method</p></div>
+          <span class="agent-state" aria-label="Ready"></span>
+        </article>
+        <article class="agent-card agent-bogdan" data-agent="bogdan">
+          <div class="agent-avatar" aria-hidden="true"><span>B</span><i></i></div>
+          <div class="agent-info"><h2>Bogdan</h2><p>Skeptic &amp; risk</p></div>
+          <span class="agent-state" aria-label="Ready"></span>
+        </article>
+      </div>
+
+      <div class="panel-rule"></div>
+      <div class="discussion-meta">
+        <div class="meta-heading"><span class="panel-overline">DISCUSSION FORMAT</span><span class="round-count">3 ROUNDS</span></div>
+        <div class="round-track" aria-label="Three discussion rounds">
+          <span class="round-step"><i>01</i><b></b></span>
+          <span class="round-step"><i>02</i><b></b></span>
+          <span class="round-step"><i>03</i><b></b></span>
+        </div>
+      </div>
+
+      <div class="alignment-card" id="alignment-card" hidden>
+        <div class="alignment-heading"><span>AGREEMENT</span><span class="alignment-info" title="Illustrative estimate from local demo agents">i</span></div>
+        <div class="alignment-value"><strong id="agreement-value">--</strong><span>%</span></div>
+        <p class="alignment-caption">Illustrative alignment</p>
+        <div class="alignment-bar"><span id="agreement-bar"></span></div>
+      </div>
+
+      <section class="summary-card" id="summary-card" aria-live="polite" hidden>
+        <div class="summary-heading"><span class="summary-symbol" aria-hidden="true">&#10022;</span><span>COUNCIL SUMMARY</span></div>
+        <p id="summary-text"></p>
+        <div class="summary-points" id="summary-points"></div>
+      </section>
+
+      <div class="panel-footer"><span class="footer-emblem" aria-hidden="true">AC</span><span>THREE VOICES, ONE QUESTION</span></div>
+    </aside>
+  </div>
+</body>
+</html>
